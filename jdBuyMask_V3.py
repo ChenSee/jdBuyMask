@@ -469,8 +469,8 @@ while (1):
             validate_cookies()
             getUsername()
             select_all_cart_item()
-            remove_item()
-            add_item_to_cart(skuId)
+        remove_item()
+        add_item_to_cart(skuId)
         # 检测配置文件修改
         if int(time.time()) - configTime >= 60:
             check_Config()
