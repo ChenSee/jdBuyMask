@@ -201,13 +201,12 @@ def select_all_cart_item():
 
 
 def remove_item():
-    url = "https://cart.jd.com/batchRemoveSkusFromCart.action"
-    data = {
-        't': 0,
-        'null': '',
-        'outSkus': '',
-        'random': random.random(),
-        'locationId': '19-1607-4773-0'
+    url = "https://cart.jd.com/quickDel.action"
+    payload = {
+        'method': 'del',
+        'delParam': '[{id:' + skuId + ',s:false,vs:false}]',
+        'callback': 'jQuery9437752',
+        '_': random.random()
     }
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.37",
@@ -220,7 +219,7 @@ def remove_item():
         "Origin": "https://cart.jd.com",
         "Connection": "keep-alive"
     }
-    resp = session.post(url, data=data, headers=headers)
+    resp = session.get(url=url, params=payload, headers=headers)
     logger.info('清空购物车')
     if resp.status_code != requests.codes.OK:
         print('Status: %u, Url: %s' % (resp.status_code, resp.url))
